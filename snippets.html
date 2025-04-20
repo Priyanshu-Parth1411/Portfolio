@@ -3414,10 +3414,10 @@ card.addEventListener('mouseleave', () => {
 .overlay-container:hover .overlay {
     opacity: 1;
 }</code></pre>
-        </div>
+                    </div>
                 </div>
                     </div>
-        </div>
+                    </div>
     </section>
 
     <footer>
@@ -3428,12 +3428,15 @@ card.addEventListener('mouseleave', () => {
                 <a href="#"><i class="fab fa-linkedin"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
-                    </div>
+                </div>
     </footer>
 
     <script>
         // Theme Toggle Functionality
-        const themeToggle = document.getElementById('themeToggle');
+        document.addEventListener('DOMContentLoaded', function() {
+    // Theme Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) { // Only run theme toggle code if the button exists
         const icon = themeToggle.querySelector('i');
         
         // Check for saved theme preference
@@ -3453,19 +3456,25 @@ card.addEventListener('mouseleave', () => {
         function updateIcon(theme) {
             icon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
         }
+    }
 
-        // Code Display Toggle
-        document.querySelectorAll('.show-code').forEach(button => {
-            button.addEventListener('click', () => {
-                const codeContainer = button.parentElement.nextElementSibling;
-                codeContainer.style.display = codeContainer.style.display === 'block' ? 'none' : 'block';
-                
-                if (codeContainer.style.display === 'block') {
-                    hljs.highlightElement(codeContainer.querySelector('code'));
-                }
-            });
+    // Code Display Toggle
+    document.querySelectorAll('.show-code').forEach(button => {
+        button.addEventListener('click', () => {
+            const codeContainer = button.parentElement.nextElementSibling;
+            
+            // Force display none/block instead of toggling
+            if (getComputedStyle(codeContainer).display === 'none') {
+                codeContainer.style.display = 'block';
+                hljs.highlightElement(codeContainer.querySelector('code'));
+            } else {
+                codeContainer.style.display = 'none';
+            }
         });
+    });
 
+    // Rest of your code for magnetic button, parallax card, etc.
+});
         // Magnetic Button Effect
         const magneticContainer = document.querySelector('.magnetic-container');
         const magneticButton = document.querySelector('.magnetic-btn');
